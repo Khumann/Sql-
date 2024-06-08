@@ -79,3 +79,15 @@ select e1.name as Employee
 from employee e1
 inner join employee e2 on  e1.managerId = e2.id
 where e1.salary > e2.salary
+
+/* DUPLICATE EMAIL*/
+
+--1st solution
+   select email
+      from Person 
+   having count(email) >1;
+
+--2nd solution   
+select distinct(p2.email)
+from Person p1
+inner join person p2 on p2.email=p1.email AND p1.id <> p2.id
