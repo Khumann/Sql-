@@ -68,3 +68,14 @@ FROM ConsecutiveNums;
     join Logs l2 on L1.id=L2.id -1 --use -1 to start the sequence by checking its previous row
     join Logs L3 on L2.id=L3.id -2 --use -2 to check the sequence two position before  by checking the previous 2 rows, so that it will maintain the sequence with out making it complex and confirms the continuation of it
     where L1.num=L2.num AND L2.num = L3.num
+
+
+
+
+ /* Employees Earning More Than Their Managers Write a solution to find the employees who earn more than their managers.
+
+Return the result table in any order. */
+select e1.name as Employee
+from employee e1
+inner join employee e2 on  e1.managerId = e2.id
+where e1.salary > e2.salary
