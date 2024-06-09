@@ -91,3 +91,36 @@ where e1.salary > e2.salary
 select distinct(p2.email)
 from Person p1
 inner join person p2 on p2.email=p1.email AND p1.id <> p2.id
+
+
+
+/* Customers Who Never Order Write a solution to find all customers who never order anything. */
+
+select name  as Customers
+from Customers as c
+Left join orders as o on c.id=o.customerId
+where o.customerId IS NULL
+
+
+
+/* Department Highest Salary*/
+    SELECT d.name AS Department, e.name AS Employee, e.salary AS Salary
+FROM Employee e
+JOIN Department d ON e.departmentId = d.id
+WHERE (e.departmentId, e.salary) IN (
+    SELECT departmentId, MAX(salary)
+    FROM Employee
+    GROUP BY departmentId
+);
+
+
+--2nd using CTE
+WITH Dum AS (
+    SELECT departmentId, MAX(salary) AS max_salary
+    FROM Employee
+    GROUP BY departmentId
+)
+SELECT D.name AS Department, E.name AS Employee, E.salary
+FROM Employee E
+JOIN Department D ON E.departmentId = D.id
+JOIN Dum D ON E.departmentId = D.departmentId AND E.salary = D.max_salary;
