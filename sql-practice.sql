@@ -124,3 +124,16 @@ SELECT D.name AS Department, E.name AS Employee, E.salary
 FROM Employee E
 JOIN Department D ON E.departmentId = D.id
 JOIN Dum D ON E.departmentId = D.departmentId AND E.salary = D.max_salary;
+
+
+/* A company's executives are interested in seeing who earns the most money in each of the company's departments. A high earner in a department is an employee who has a salary in the top three unique salaries for that department.
+
+Write a solution to find the employees who are high earners in each of the departments.
+
+Return the result table in any order.*/ 
+select Department, Employee, salary
+from ( select dept.name as Department, emp.name as Employee, salary, 
+       dense_rank() over(partition by dept.name order by salary desc) rate
+        from Employee emp
+         join Department dept on emp.departmentid = dept.id ) t1
+where rate <= 3
