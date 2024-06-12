@@ -131,9 +131,10 @@ JOIN Dum D ON E.departmentId = D.departmentId AND E.salary = D.max_salary;
 Write a solution to find the employees who are high earners in each of the departments.
 
 Return the result table in any order.*/ 
-select Department, Employee, salary
-from ( select dept.name as Department, emp.name as Employee, salary, 
-       dense_rank() over(partition by dept.name order by salary desc) rate
-        from Employee emp
-         join Department dept on emp.departmentid = dept.id ) t1
-where rate <= 3
+SELECT Department, Employee, salary 
+from ( select d.name as department, E.name as employee, salary, 
+        dense_rank() over(partition by  d.name order by salary desc)  Rak
+         from Employee E 
+         inner join Department D on E.departmentid = D.id) as t1
+
+where Rak <=3
