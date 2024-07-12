@@ -1,4 +1,4 @@
-##SQL Assignment Repository
+SQL Assignment Repository
 Welcome to the SQL Assignment repository! This repository contains SQL scripts to perform various database tasks and practice SQL queries.
 
 Table of Contents
