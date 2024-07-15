@@ -172,3 +172,19 @@ ORDER BY
         ELSE S.name
     END,
     S.marks;
+
+
+
+with salary_range
+AS
+(select
+    employee_id,
+        name,
+        year,
+        salary,
+        LAG(salary) OVER(Partition BY employee_id order by year) as prev_salary
+        from employee_salary)
+select employee_id, name
+from salary_rangewhere salary > prev_year_salary
+group by employee_id, name
+having count (*) >= 3
